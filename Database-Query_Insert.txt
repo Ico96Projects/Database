@@ -1,0 +1,91 @@
+begin;
+
+/*		Popoliamo la tabella Cittadino			*/
+insert into Cittadino (CF, Nome, Cognome, Città, Indirizzo, Età, Categoria, AllergieIntolleranzeAlimentari)
+	values('MRNNTN92C09H472Q', 'Antonio', 'Marini', 'Torino', 'Via Richelmi 07', '30', 'Personale sanitario e scolastico', 'graminacee, frutta a guscio');
+insert into Cittadino (CF, Nome, Cognome, Città, Indirizzo, Età, Categoria, PositivitàPregressa)
+	values('SCCCLL76L50A468Z', 'Camilla', 'Sacchetto', 'Roma', 'Via XX Settembre 20', '45', 'Persona fragile', true);
+insert into Cittadino (CF, Nome, Cognome, Città, Indirizzo, Età, Categoria)
+	values('RSSNEE75M01L081U', 'Enea', 'Rossi', 'Bardonecchia', 'Via Melezet 1', '46', 'Altro cittadino');
+insert into Cittadino (CF, Nome, Cognome, Città, Indirizzo, Età, Categoria, AllergieIntolleranzeAlimentari)
+	values('PRSFNC33T56A089D', 'Francesca', 'Pirassi', 'Agrigento', 'Corso Mazzini 22/b', '88', 'Personale sanitario e scolastico', 'latticini');
+insert into Cittadino (CF, Nome, Cognome, Città, Indirizzo, Età, Categoria, AllergieIntolleranzeAlimentari)
+	values('DNSLSS00E50I452M', 'Alessia', 'Dionisio', 'Roma', 'via Reggio Emilia 5', '21', 'Altro cittadino', 'glutine');
+insert into Cittadino (CF, Nome, Cognome, Città, Indirizzo, Età, Categoria)
+	values('NTNLRT06E10A326J', 'Alberto', 'Antonini', 'Torino', 'Via genova 9', '15', 'Persona fragile');
+insert into Cittadino (CF, Nome, Cognome, Città, Indirizzo, Età, Categoria, PositivitàPregressa, AllergieIntolleranzeAlimentari)
+	values('MRBFRC94P08F104H', 'Federico', 'Morbidelli', 'Melfi', 'Strada Oracolo 10', '27', 'Personale sanitario e scolastico', true, 'polline');	
+insert into Cittadino (CF, Nome, Cognome, Città, Indirizzo, Età, Categoria, PositivitàPregressa, AllergieIntolleranzeAlimentari)
+	values('TNTLRT66S30L219Y', 'Alberto', 'Tantino', 'Torino', 'Via Genova 5', '55', 'Personale sanitario e scolastico', true, 'polline');	
+insert into Cittadino (CF, Nome, Cognome, Città, Indirizzo, Età, Categoria)
+	values('PSCMRZ51D12D969T', 'Maurizio', 'Piscopo', 'Torino', 'Via Po 40', '70', 'Altro cittadino');
+insert into Cittadino (CF, Nome, Cognome, Città, Indirizzo, Età, Categoria)
+	values('TSCFNC19H04A757I', 'Franco', 'Toschino', 'Roma', 'corso Trieste', '102', 'Persona fragile');
+
+/*		Popoliamo la tabella Appuntamento		*/
+insert into Appuntamento (CF, DataPrimo, OraPrimo, Modo, EffettoAvverso, Mail, TipoVaccino)
+	values('MRNNTN92C09H472Q','2021-07-10','17:00','mail',true,'Marini.Antonio@mail.com','COV');
+insert into Appuntamento (CF, DataPrimo, OraPrimo, Modo, EffettoAvverso, Mail, TipoVaccino)
+	values('SCCCLL76L50A468Z','2021-07-11','12:00','mail',true,'Sacchetto.Camilla@mail.com','FLU');
+insert into Appuntamento (CF, DataPrimo, OraPrimo, Modo, EffettoAvverso, Mail, TipoVaccino)
+	values('RSSNEE75M01L081U','2021-07-20','15:00','mail',true,'Rossi.Enea@mail.com','FLU');
+insert into Appuntamento (CF, DataPrimo, OraPrimo, Modo, Mail, TipoVaccino)
+	values('PRSFNC33T56A089D','2021-07-15','14:00','mail','Pirassi.Francesca@mail.com','COR');
+insert into Appuntamento (CF, DataPrimo, OraPrimo, Modo, Mail, TipoVaccino)
+	values('DNSLSS00E50I452M','2021-07-24','18:30','mail','Dionisio.Alessia@mail.com','COR');
+insert into Appuntamento (CF, DataPrimo, OraPrimo, Modo, DataSecondo, OraSecondo, Telefono, TipoVaccino)
+	values('NTNLRT06E10A326J','2021-07-27','16:15','telefono','2021-08-16','18:00','+39xxxxxxxxxx','FLU');
+insert into Appuntamento (CF, DataPrimo, OraPrimo, Modo, DataSecondo, OraSecondo, Telefono, TipoVaccino)
+	values('MRBFRC94P08F104H','2021-08-10','17:40','telefono','2021-09-03','19:00','+39xxxxxxxxxx','COV');
+insert into Appuntamento (CF, DataPrimo, OraPrimo, Modo, DataSecondo, OraSecondo, Telefono, TipoVaccino)
+	values('TNTLRT66S30L219Y','2021-07-06','19:00','telefono','2021-07-30','17:30','+39xxxxxxxxxx','COV');
+insert into Appuntamento (CF, DataPrimo, OraPrimo, Modo, DataSecondo, OraSecondo, Telefono, TipoVaccino)
+	values('PSCMRZ51D12D969T','2021-07-13','10:00','telefono','2021-08-02','8:45','+39xxxxxxxxxx','FLU');
+insert into Appuntamento (CF, DataPrimo, OraPrimo, Modo, DataSecondo, OraSecondo, Telefono, TipoVaccino)
+	values('TSCFNC19H04A757I','2021-07-21','8:30','telefono','2021-08-20','11:30','+39xxxxxxxxxx','COR');
+
+/*		Popoliamo la tabella Centro Vaccinale		*/
+insert into CentroVaccinale (Città, Indirizzo, QuantitàCOVIDIN, QuantitàCORONAX, QuantitàFLUSTOP)
+	values('Torino','via Nizza 230',200,0,123);
+insert into CentroVaccinale (Città, Indirizzo, QuantitàCOVIDIN, QuantitàCORONAX, QuantitàFLUSTOP)
+	values('Roma','via Appia Nuova 29',0,222,900);
+insert into CentroVaccinale (Città, Indirizzo, QuantitàCOVIDIN, QuantitàCORONAX, QuantitàFLUSTOP)
+	values('Bardonecchia','via Medail 20',50,411,100);
+insert into CentroVaccinale (Città, Indirizzo, QuantitàCOVIDIN, QuantitàCORONAX, QuantitàFLUSTOP)
+	values('Roma','via Bologna 3',40,455,15);
+
+/*		Popoliamo la tabella Medico			*/
+insert into Medico (CF_Med, Nome, Cognome, Indirizzo, Città, Età, Qualifica,CittàLavoro, IndirizzoLavoro)
+	values('PTCMRC69H12H501M','Marco','Pitaccolo','via XX Settembre 44','Roma',52,'medico di base','Roma','via Bologna 3');
+insert into Medico (CF_Med, Nome, Cognome, Indirizzo, Città, Età, Qualifica,CittàLavoro, IndirizzoLavoro)
+	values('PCHSRG81A16L219Z','Sergio','Pochettino','via nizza 30','Torino',40,'altro medico','Torino','via Nizza 230');
+insert into Medico (CF_Med, Nome, Cognome, Indirizzo, Città, Età, Qualifica,CittàLavoro, IndirizzoLavoro)
+	values('CHCGPP91D16L219U','Giuseppe','Chicu','via Melezet 12','Bardonecchia',30,'altro medico','Bardonecchia','via Medail 20');
+insert into Medico (CF_Med, Nome, Cognome, Indirizzo, Città, Età, Qualifica,CittàLavoro, IndirizzoLavoro)
+	values('GRGFRC71A17H501P','Federica','Gorga','via Torino 49','Roma',52,'medico di base','Roma','via Appia Nuova 29');
+insert into Medico (CF_Med, Nome, Cognome, Indirizzo, Città, Età, Qualifica,CittàLavoro, IndirizzoLavoro)
+	values('LVRGAI61H14L219Z','Gaia','Olivero','via Roma 12','Torino',62,'altro medico','Torino','via Nizza 230');
+
+/*		Popoliamo la tabella Vaccino			*/
+insert into Vaccino (Tipo, NumeroSomministrazioni, IntervalloDosi, EtàMax, EtàMin)
+	values('COVIDIN',2,'24 days',60,20);
+insert into Vaccino (Tipo, NumeroSomministrazioni, IntervalloDosi, EtàMax, EtàMin)
+	values('CORONAX',2,'30 days',150,30);
+insert into Vaccino (Tipo, NumeroSomministrazioni, IntervalloDosi, EtàMax, EtàMin)
+	values('FLUSTOP',1,'20 days',100,10);
+
+/*		Popoliamo la tabella Lotto			*/
+insert into Lotto (ID, Tipo, DataProduzione, DataScadenza)
+	values('COV0000001','COVIDIN','2021-03-06','2021-10-06');
+insert into Lotto (ID, Tipo, DataProduzione, DataScadenza, DataUltimaReazioneAllergica)
+	values('COV0000002','COVIDIN','2021-01-16','2021-8-16','2021-04-27');
+insert into Lotto (ID, Tipo, DataProduzione, DataScadenza, DataUltimaReazioneAllergica)
+	values('COR0000001','CORONAX','2021-02-08','2022-02-08','2021-06-10');
+insert into Lotto (ID, Tipo, DataProduzione, DataScadenza)
+	values('COR0000002','CORONAX','2021-03-22','2022-03-22');
+insert into Lotto (ID, Tipo, DataProduzione, DataScadenza, DataUltimaReazioneAllergica)
+	values('FLU0000001','FLUSTOP','2020-12-12','2021-10-12','2021-02-17');
+insert into Lotto (ID, Tipo, DataProduzione, DataScadenza)
+	values('FLU0000002','FLUSTOP','2021-01-20','2021-11-20');
+
+commit;

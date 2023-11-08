@@ -1,0 +1,99 @@
+begin;
+drop table if exists Cittadino CASCADE;
+drop table if exists Appuntamento;
+drop table if exists CentroVaccinale;
+drop table if exists Medico;
+drop table if exists Vaccino CASCADE;
+drop table if exists Lotto;
+
+Create table Cittadino(
+	CF varchar(16) PRIMARY KEY, 
+	Nome varchar(50), 
+	Cognome varchar(50), 
+	Città varchar(50) NOT NULL, 
+	Indirizzo varchar(50) NOT NULL, 
+	Età smallint NOT NULL CHECK(Età>=0), 
+	Categoria varchar(35) NOT NULL, 
+	PositivitàPregressa boolean DEFAULT false,
+	AllergieIntolleranzeAlimentari varchar(100) DEFAULT ''
+);
+
+Create table Appuntamento (
+	CF char(16) PRIMARY KEY,
+	DataPrimo date NOT NULL, 
+	OraPrimo time NOT NULL,
+	Modo varchar(10) NOT NULL, 
+	EffettoAvverso boolean DEFAULT false,
+	DataSecondo date, 
+	OraSecondo time,
+	Mail varchar(75), 
+	Telefono varchar(15),	
+	TipoVaccino char(7) NOT NULL,
+	CONSTRAINT fk_Cittadino
+		FOREIGN KEY(CF)
+			REFERENCES Cittadino(CF),
+	CONSTRAINT date_non_coerenti 
+		CHECK ((DataSecondo>=DataPrimo)and(DataSecondo>=now())and(DataPrimo>=now())),
+	CONSTRAINT mancano_informazioni_secondo_appuntamento 
+		CHECK (((DataSecondo IS NOT NULL)and(OraSecondo IS NOT NULL))or((DataSecondo IS NULL)and(OraSecondo IS NULL))),	
+	CONSTRAINT manca_mail_e_telefono 
+		CHECK ((Mail IS NOT NULL) or (Telefono IS NOT NULL)),
+	CONSTRAINT modo_non_coerente 
+		CHECK (((Modo='mail')and(Mail IS NOT NULL))or((Modo='telefono')and(Telefono IS NOT NULL))),
+	CONSTRAINT secondo_appuntamento_con_effetto_avverso 
+		CHECK ((EffettoAvverso=true and DataSecondo IS NULL and OraSecondo IS NULL)or(EffettoAvverso=false))
+
+);
+
+Create table CentroVaccinale (
+	Città varchar(50), 
+	Indirizzo varchar(50), 
+	QuantitàCOVIDIN	int	NOT NULL CHECK(QuantitàCOVIDIN >=0), 
+	QuantitàCORONAX	int	NOT NULL CHECK(QuantitàCORONAX >=0), 
+	QuantitàFLUSTOP	int NOT NULL CHECK(QuantitàFLUSTOP >=0),
+	PRIMARY KEY(Città, Indirizzo)
+);
+
+Create table Medico (
+	CF_Med char(16)	PRIMARY KEY, 
+	Nome varchar(50), 
+	Cognome varchar(50), 
+	Indirizzo varchar(50), 
+	Città varchar(50),
+	Età smallint NOT NULL CHECK(Età>=0), 
+	Qualifica varchar(15) NOT NULL,
+	CittàLavoro varchar(50), 
+	IndirizzoLavoro varchar(50),
+	CONSTRAINT fk_Medico
+		FOREIGN KEY(CittàLavoro,IndirizzoLavoro)
+			REFERENCES CentroVaccinale(Città,Indirizzo)
+);
+
+Create table Vaccino (
+	Tipo char(7) PRIMARY KEY, 
+	NumeroSomministrazioni smallint	NOT NULL CHECK(NumeroSomministrazioni>=0) DEFAULT 1, 
+	IntervalloDosi interval DAY,
+	EtàMax smallint NOT NULL,
+	EtàMin smallint	NOT NULL CHECK(EtàMin >=0),
+	CONSTRAINT EtàMin_e_EtàMax_confuse 
+		CHECK (EtàMax>=EtàMin),
+	CONSTRAINT manca_Intervallo_Dosi 
+		CHECK ((IntervalloDosi IS NULL)and(NumeroSomministrazioni>1))
+);
+
+Create table Lotto (
+	ID char(10) PRIMARY KEY,
+	Tipo char(7) NOT NULL, 
+	DataProduzione date NOT NULL, 
+	DataScadenza date NOT NULL, 
+	DataUltimaReazioneAllergica date,
+	CONSTRAINT fk_Vaccino
+		FOREIGN KEY(Tipo)
+			REFERENCES Vaccino(Tipo),
+	CONSTRAINT CHK_Lotto 
+		CHECK ((DataScadenza>DataProduzione) and (now()>=DataUltimaReazioneAllergica) and (DataProduzione<=now()))
+);
+
+commit;
+
+/*		rollback;		*/
